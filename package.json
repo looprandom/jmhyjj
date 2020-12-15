@@ -1,0 +1,47 @@
+{
+  "name": "jmhyjj",
+  "version": "1.0.0",
+  "private": true,
+  "description": "江门市海洋经济运行监测与评估系统",
+  "author": "",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "main.js",
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "echarts": "^5.0.0",
+    "reset-css": "^5.0.1",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-alpha.6",
+    "vuex": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0-alpha.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "vue-cli-plugin-vue-next": "~0.1.4"
+  },
+  "_id": "jmhyjj@1.0.0",
+  "bugs": {
+    "url": "https://github.com/looprandom/jmhyjj/issues"
+  },
+  "homepage": "https://github.com/looprandom/jmhyjj#readme",
+  "license": "ISC",
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/looprandom/jmhyjj.git"
+  }
+}
