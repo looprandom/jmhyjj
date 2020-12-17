@@ -161,7 +161,7 @@ export default {
           margin: 1px;
         }
         .map{
-          background: #D1E9F7 url("../assets/image/map_bg.png") center no-repeat;
+          background: #D1E9F7 url("../assets/image/home/map_bg.png") center no-repeat;
           height: 400px;
           margin: 1px;
         }

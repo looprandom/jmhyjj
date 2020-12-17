@@ -12,8 +12,10 @@
   },
   "main": "main.js",
   "dependencies": {
+    "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "echarts": "^5.0.0",
+    "qs": "^6.9.4",
     "reset-css": "^5.0.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-alpha.6",

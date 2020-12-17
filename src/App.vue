@@ -3,13 +3,20 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div> -->
-  <Header></Header>
+  <Header v-if="!$route.meta.is_login"></Header>
   <router-view/>
+  <Footer v-if="!$route.meta.is_login"></Footer>
 </template>
 <script>
 import Header from './views/Header'
+import Footer from './views/Footer'
 export default {
-  components:{Header}
+  data(){
+    return{
+      
+    }
+  },
+  components:{Header,Footer}
 }
 </script>
 <style lang="scss">

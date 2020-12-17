@@ -2,26 +2,42 @@
     <div class="header">
         <div class="top_bg"></div>
         <div class="set">
-            <div><img src="../assets/image/tuichu.gif" alt="">&nbsp;<a href="#">安全退出</a></div>
-            <div><img src="../assets/image/password.gif" alt="">&nbsp;<a href="#">修改密码</a></div>
-            <div><img src="../assets/image/H_on_Show.gif" alt="">&nbsp;<a href="#">隐藏/展开</a></div>
+            <div><img src="../assets/image/header/tuichu.gif" alt="">&nbsp;<a href="#">安全退出</a></div>
+            <div><img src="../assets/image/header/password.gif" alt="">&nbsp;<a href="#">修改密码</a></div>
+            <div><img src="../assets/image/header/H_on_Show.gif" alt="">&nbsp;<a href="#">隐藏/展开</a></div>
         </div>   
         <div class="wel">
             <div class="time">2020年12月15日&nbsp;&nbsp;星期二&nbsp;&nbsp;22:49:57</div>
-            <div>欢迎登录系统！</div>
-            <div><img src="../assets/image/xian.gif" alt=""></div>
-            <div><img src="../assets/image/sound_16x16.gif" alt=""></div>
+            <div>欢迎{{user_name}}登录系统！</div>
+            <div><img src="../assets/image/header/xian.gif" alt=""></div>
+            <div><img src="../assets/image/header/sound_16x16.gif" alt=""></div>
             <div class="help">
-                <img src="../assets/image/office.gif" alt="">
-                使用帮助
+                <img src="../assets/image/header/office.gif" alt="">
+                <a href="http://10.10.26.15/jmhyjj/Help/default.htm">使用帮助</a>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import _getMenu from '../api/home/getMenu'
 export default {
-    name: 'Header'  
+    name: 'Header',
+    data(){
+        return {
+           user_name: '超级管理员' 
+        }
+    },
+    methods:{
+        getMenu(){
+            _getMenu().then((res)=>{
+                console.log(res)
+            })
+        }
+    },
+    created(){
+        this.getMenu()
+    }
 }
 </script>
 
@@ -29,10 +45,10 @@ export default {
     .header{
         .top_bg{
             height: 125px;
-            background: url('../assets/image/title_jiangmen.png') 13px no-repeat,url('../assets/image/top_blc_.jpg') no-repeat;
+            background: url('../assets/image/header/title_jiangmen.png') 13px no-repeat,url('../assets/image/header/top_blc_.jpg') no-repeat;
         }
         .set{
-            height: 29px;
+            height: 31px;
             background-color: rgb(71,177,223);
             div{
                 img{
@@ -41,7 +57,7 @@ export default {
                     line-height: 29px;
                 };
                 float: right;
-                line-height: 29px;
+                line-height: 31px;
                 font-size: 12px;
                 color: black;
                 margin-right: 15px;
