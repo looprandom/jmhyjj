@@ -1,94 +1,105 @@
 <template>
-<div class="warp">
-    <div class="login">
-        <div class="from">
-            <label for="">用户名：<input type="text" v-model="username"></label>
-            <label for="">密码：&nbsp;&nbsp;&nbsp;<input type="password" v-model="password"></label>
-            <label for="">
-                验证码：<input type="text" style="width:150px;" v-model="captcha">
-                <img :src="captchaImg" alt="" class="captcha" @click="cpa_clk">
-            </label>
-            <div class="btn1" @click="login"></div>
-            <div class="btn2" @click="clear"></div>    
-        </div>
-        <div class="copyright">   
-            <p>版权所有：江门市海洋与渔业局      技术支持：广东蓝图信息技术有限公司</p>
-            <p>推荐宽屏显示器（分辩率：1280*1024以上），浏览器：chrome</p>
-        </div>
+<div class="login">
+    <div class="from">
+        <label for="">用户名：<input type="text" v-model="loginMessage.username"></label>
+        <label for="">密码：&nbsp;&nbsp;&nbsp;<input type="password" v-model="loginMessage.password"></label>
+        <label for="">
+            验证码：<input type="text" style="width:150px;" v-model="loginMessage.captcha">
+            <img :src="captchaImg" alt="" class="captcha" @click="getCap">
+        </label>
+        <div class="btn1" @click="login"></div>
+        <div class="btn2" @click="clear"></div>    
     </div>
-</div>       
-
+    <div class="copyright">   
+        <p>版权所有：江门市海洋与渔业局      技术支持：广东蓝图信息技术有限公司</p>
+        <p>推荐宽屏显示器（分辩率：1280*1024以上），浏览器：chrome</p>
+    </div>
+</div>
 </template>
 
 <script>
 import _getCap from '../api/login/getCap'
 import _login from '../api/login/login'
+import {ref,reactive,onMounted} from 'vue'
+import {useRouter} from 'vue-router'
+import {useStore} from 'vuex'
 export default {
     name: 'Login',
-   data(){
-       return{
-           captchaImg:'',
-           captchaKey:'',
-           username: '',
-           password: '',
-           captcha: ''
-       }
-   },
-   methods:{
-       getCap(){
-           _getCap().then((res)=>{
-               if(res.status == 'success'){
-                   this.captchaImg = res.data.base64Img
-                   this.captchaKey = res.data.captchaKey
-               }else{
-                   alert('获取验证码失败')
-               }
-           })
-       },
-       login(){
-            const username = this.username
-            const password = this.password
-            const captcha = this.captcha
+   setup(){
+       const router = useRouter()
+       const store = useStore()
+       const loginMessage = reactive({
+           username:'',
+           password:'',
+           captcha:'',
+           captchaKey:''
+       })
+       //登录逻辑
+       const login = ()=>{
+            const username = loginMessage.username
+            const password = loginMessage.password
+            const captcha = loginMessage.captcha
+            const captchaKey = loginMessage.captchaKey
             if(!(username&&password&&captcha)) {
                 alert('请完成表单信息!')
                 return
             }
-           _login(this.username,this.password,this.captchaKey,this.captcha).then((res)=>{
-              if(res.success){
+           _login(username,password,captchaKey,captcha).then((res)=>{
+              if(res.code == 20000){
                     localStorage.setItem('token',res.data.token)
-                    this.$router.go(-1)
+                    store.commit('change_role',res.data.role)
+                    store.commit('change_permission',res.data.permission)
+                    store.commit('change_token',res.data.token)
+                    router.go(-1)
               }else{
-                  alert(res.data)
+                  alert(res.errMsg)
               }
            })
-       },
-       cpa_clk(){
-           this.getCap()
-       },
-       clear(){
-           this.username = '',
-           this.password = '',
-           this.captcha = ''
        }
-   },
-   created(){
-        this.getCap()
+       //重置表单
+       const clear = ()=>{
+           loginMessage.username = '',
+           loginMessage.password = '',
+           loginMessage.captcha = ''
+       }
+       //获取验证码
+       const captchaImg = ref('')
+       const getCap = ()=>{
+            _getCap().then((res)=>{
+               if(res.code == 20000){
+                   captchaImg.value = res.data.captchaInformation.base64Img
+                   loginMessage.captchaKey = res.data.captchaInformation.captchaKey
+               }else{
+                   alert('获取验证码失败')
+               }
+           })
+       }
+       onMounted(()=>{
+           getCap()
+       }) 
+       return{
+           loginMessage,
+           captchaImg,
+           clear,
+           login,
+           getCap
+       }
    } 
-  
 }
 </script>
 
 <style lang="scss" scope="this api replaced by slot-scope in 2.5.0+">
     .login{
-        // position: relative;
+        position: relative;
         //width: 1350px;
-        margin: 0 auto;
-        height: 722px;
-        background:no-repeat center/80%  100% url("../assets/image/login/login.png")  fixed,url("../assets/image/login/bg.gif");
+        // margin: 0 auto;
+        height: 720px;
+        background: url("../assets/image/login/login.png") no-repeat center top/67%,url("../assets/image/login/bg.gif") repeat left/contain;;
+        // background:no-repeat center/80%  wi url("../assets/image/login/login.png"),url("../assets/image/login/bg.gif");
         .from{
             position: absolute;
-            top: 294px;
-            left: 965px;
+            top: 296px;
+            left: 941px;
             label{
                 line-height: 20px;
                 font-size: 13px;
