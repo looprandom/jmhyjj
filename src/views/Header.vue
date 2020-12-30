@@ -4,12 +4,12 @@
         <div class="set">
             <ul>
                 <li v-for="(item) of menu" :key="item.id">
-                    <a href="#">{{item.name}}</a>
+                    <router-link :to="item.path">{{item.name}}</router-link>
                 </li>
             </ul>
-            <div @click="logout"><img src="../assets/image/header/tuichu.gif" alt="">&nbsp;<a href="#">安全退出</a></div>
-            <div><img src="../assets/image/header/password.gif" alt="">&nbsp;<a href="#">修改密码</a></div>
-            <div @click="toggle_top"><img src="../assets/image/header/H_on_Show.gif" alt="">&nbsp;<a href="#">隐藏/展开</a></div>
+            <div @click="logout"><img src="../assets/image/header/tuichu.gif" alt="">&nbsp;<span>安全退出</span></div>
+            <div><img src="../assets/image/header/password.gif" alt="">&nbsp;<span>修改密码</span></div>
+            <div @click="toggle_top"><img src="../assets/image/header/H_on_Show.gif" alt="">&nbsp;<span>隐藏/展开</span></div>
         </div>   
         <div class="wel">
             <div class="time">{{time.date}}&nbsp;&nbsp;{{time.week}}&nbsp;&nbsp;{{time.clock}}</div>
@@ -35,6 +35,7 @@ import _getMenu from '../api/home/getMenu'
 import _logout from '../api/home/logout'
 import moment from 'moment'
 
+const tmpRoute = ['/','/home/enterprise']
 export default {
     name: 'Header',
     components:{Announce},
@@ -79,7 +80,11 @@ export default {
         onMounted(()=>{
              _getMenu().then((res)=>{
                 if(res.code == 20000){
-                    menu.value = res.data.menu
+                    tmpRoute.forEach((item,index) => {
+                        res.data.menu[index].path = item
+                    })
+                    console.log(res.data.menu)
+                     menu.value = res.data.menu
                 }
             })       
         })
@@ -135,18 +140,18 @@ export default {
                 font-size: 12px;
                 color: black;
                 margin-right: 15px;
+                //不加span字莫名不见
+                span{
+                    cursor: pointer;
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
                  img{
                     vertical-align: middle; //文字和图片中线对齐?
                     width: 16px;
                     line-height: 29px;
                 }
-                a{
-                    color: black;
-                    &:hover{
-                        text-decoration: underline;
-                    }
-                }
-
             }
         }
         .wel{

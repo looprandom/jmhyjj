@@ -48,12 +48,19 @@ var echarts = require('echarts');
 
 function init_chart(){
     // 基于准备好的dom，初始化echarts实例
-  console.log(document.getElementById('chart'))
   var myChart = echarts.init(document.getElementById('chart'));
   // 绘制图表
   myChart.setOption({
       title: {
-          text: '海洋监测'
+          text: '海洋监测',
+          left: 'center'
+      },
+      grid:{
+            x:25,
+            y:45,
+            x2:5,
+            y2:30,
+            // borderWidth:1
       },
       tooltip: {},
       xAxis: {
@@ -149,6 +156,7 @@ export default {
           }
         }
         .news{
+          min-height: 447px;
           .title{
              background: url('../assets/image/home/left_tit02.png') left top/cover;
           }
@@ -175,6 +183,8 @@ export default {
           height: 225px;
           background-color: #fff;
           margin: 1px;
+          padding: 15px;
+          box-sizing: border-box;
         }
         .map{
           background: #D1E9F7 url("../assets/image/home/map_bg.png") center no-repeat;
@@ -192,32 +202,32 @@ export default {
           img:first-child{
             position: absolute;
             top: 155px;
-            left: 386px;
+            left: 393px;
           }
            img:nth-child(2){
             position: absolute;
             top: 43px;
-            left: 583px;
+            left: 591px;
           }
            img:nth-child(3){
             position: absolute;
             top: 120px;
-            left: 834px;
+            left: 841px;
           }
            img:nth-child(4){
             position: absolute;
             top: 105px;
-            left: 483px;
+            left: 490px;
           }
             img:nth-child(5){
             position: absolute;
-            top: 168px;
-            left: 508px;
+            top: 170px;
+            left: 515px;
           }
            img:nth-child(6){
             position: absolute;
-            top: 131px;
-            left: 720px;
+            top: 129px;
+            left: 726px;
           }
         }
       }

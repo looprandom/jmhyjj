@@ -21,15 +21,15 @@ service.interceptors.request.use(config => {
 
     return config
 }, err => {
-    return Promise.reject(err);
+    return Promise.reject(err)
 })
 
 /****** respone拦截器==>对响应做处理 ******/
 service.interceptors.response.use(
     response => { //成功请求到数据
-        if (response.data.code === 20001) {
+        if (response.data.code !== 20000) {
             localStorage.setItem('token', '')
-            router.replace({
+            router.push({
                 path: '/login'
             })
         }
