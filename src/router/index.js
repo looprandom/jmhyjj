@@ -13,6 +13,10 @@ const EnterpriseList = () =>
     import ('../views/EnterpriseList')
 const EnterpriseAnalysis = () =>
     import ('../views/EnterpriseAnalysis')
+const NoFound = () =>
+    import ('../views/NotFound')
+const EditEnterprise = () =>
+    import ('../views/EditEnterprise')
 
 const constantRouterMap = [{
         path: '/login',
@@ -39,7 +43,10 @@ const constantRouterMap = [{
                 component: EnterpriseAnalysis
             }]
         }]
-    }
+    },
+    { path: '/edit_enterprise', component: EditEnterprise },
+    { path: '/404', component: NoFound },
+    { path: "/:catchAll(.*)", redirect: '/404' }
 ]
 
 // const adminRouteMap = [

@@ -93,7 +93,7 @@ export default {
         position: relative;
         //width: 1350px;
         // margin: 0 auto;
-        height: 720px;
+        min-height: 720px;
         background: url("../assets/image/login/login.png") no-repeat center top/67%,url("../assets/image/login/bg.gif") repeat left/contain;;
         // background:no-repeat center/80%  wi url("../assets/image/login/login.png"),url("../assets/image/login/bg.gif");
         .from{

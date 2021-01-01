@@ -38,7 +38,7 @@ const option = {
     title: {
         left: 'center',
         top: 20
-    },
+    },                                                                                                                           
      grid:{
             x:25,
             y:45,
@@ -57,7 +57,7 @@ const option = {
     },
     series: [
         {
-            name: '访问来源',
+            name: '企业',
             type: 'pie',
             radius: '55%',
             center: ['50%', '50%'],
