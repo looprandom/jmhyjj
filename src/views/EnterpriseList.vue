@@ -82,10 +82,10 @@
                         <th>操作</th>
                     </tr>
                     <tr v-for="item of companies" :key=item.id>
-                       <td>{{item.industryName}}</td>
+                       <td>{{item.name}}</td>
                        <td>{{item.comCode}}</td>
                        <td>{{item.comComtype}}</td>
-                       <td></td>
+                       <td>{{item.industryName}}</td>
                        <td>{{item.comAddressCounty}}</td>
                        <td>{{item.comBusinessstatus}}</td>
                         <td class="checked">{{item.comApply}}</td>
