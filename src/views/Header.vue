@@ -110,6 +110,8 @@ export default {
         }
         .set{
             height: 31px;
+            height: 5vh;
+            box-sizing: border-box;
             background: url('../assets/image/header/nav-bg.png');
             ul{
                 padding-left: 40px;

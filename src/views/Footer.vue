@@ -6,7 +6,7 @@
 <style lang="scss" scope="this api replaced by slot-scope in 2.5.0+">
    .footer{
        line-height: 45px;
-       text-align: center;
+       text-align: center;  
        font-size: 12px;
        color: black;
        background: url("../assets/image/footer/banquan.gif");

@@ -16,7 +16,10 @@
                                      @click="click_comType(2)">多产业法人单位</label>  
                 <label for=""><input type="checkbox" 
                                     :checked="comType[3]"
-                                     @click="click_comType(3)">产业活动单位</label>    
+                                     @click="click_comType(3)">产业活动单位</label>
+                <label for=""><input type="checkbox" 
+                                    :checked="comType[4]"
+                                     @click="click_comType(4)">其他</label>    
             </div>
             <div class="industry">
                 <table>
@@ -87,7 +90,7 @@
                        <td>{{item.comBusinessstatus}}</td>
                         <td class="checked">{{item.comApply}}</td>
                         <td>
-                            <router-link to="/edit_enterprist"
+                            <router-link :to="`/edit_enterprise?id=${item.id}`"
                                         class="edit">
                                 编辑
                             </router-link>
@@ -98,15 +101,30 @@
             </div>
             <div class="opera">
                <div class="left">
-                    <span>总记录：8088条</span>
-                    <span>页码：1/809页</span>
-                    <span>每页 <input type="text"> 条</span>
+                    <span>总记录：{{sum}}条</span>
+                    <span>页码：{{page}} /{{Math.ceil(sum / page)}}</span>
+                    <span>每页 <input type="number" v-model="size" min="5"
+                                        max="50"
+                                        @keyup="input_size"> 条</span>
                </div>
                <div class="right">
-                   <span>首页&nbsp;上一页</span>
-                   <span>1 2 3 4 5 6 7 8 9 10 ...</span>
-                   <span>下一页</span>
-                   <span><input type="text">&nbsp;go</span>
+                   <span
+                        ><span @click="change_page(1)" class="go">首页</span>&nbsp;
+                        <span @click="change_page(page - 1)" class="go">上一页</span> 
+                    </span>
+                    <span>
+                        <span v-for="n of 10"
+                             :key="n"
+                              class="go"
+                               @click="change_page(page + n - 1)"
+                               :class="{current: n === 1}">
+                            {{page + n - 1}}
+                        </span>
+                    </span>
+                   <span @click="change_page(page + 1)" class="go">下一页</span>
+                   <span><input type="number" v-model="go" min="1">&nbsp;
+                        <span @click="click_go" class="go">go</span>
+                    </span>
                </div>
             </div>
         </div>
@@ -123,7 +141,9 @@
 
 <script>
 import {onMounted,ref} from 'vue'
+import debounce from '../api/../util/debounce'
 import getIndusty from '../api/enterprise/getIndustry'
+import getEnterprise from '../api/enterprise/getEnterprise'
 export default {
     setup(){
         //获取行业信息
@@ -131,6 +151,7 @@ export default {
         const firstLine = ref([])
         const  industriesCheckList = ref([])
         onMounted(() => {
+            //异步编程
             getIndusty().then((res) => {
                 const industries = res.data.industries
                 firstLine.value = industries.slice(0,5)
@@ -142,13 +163,14 @@ export default {
                     industriesList.value.push(next)
                     i += 6
                 }
+                 sendReq()
             })
-            console.log(industriesCheckList.value)
+            // window.location.reload()
         })
       
         //params区
         //comType参数
-        const comType = ref([true,true,true,true])
+        const comType = ref([true,true,true,true,true])
         const click_all_comType = () => {
             let cur = comType.value[0]
             for(let i = 0;i < comType.value.length;i++){
@@ -212,41 +234,47 @@ export default {
             if(region.value != '江门市')
                 parm_region = region.value
             const parm_enterprise = enterprise_name.value
-            console.log(parm_comType)
-            console.log(parm_industry)
-            console.log(parm_region)
-            console.log(parm_enterprise)
+            getEnterprise({comTypes: parm_comType,
+                            county: parm_region,
+                            industrys:parm_industry,
+                            name: parm_enterprise,
+                            page: parseInt(page.value) - 1,
+                            size: parseInt(size.value) ? parseInt(size.value) : 10 })
+                            .then(res => {
+                               if(res.code === 20000){
+                                    companies.value = res.data.companies
+                                    sum.value = parseInt(res.data.sum)
+                               }
+                            })
         }
 
-        const companies = ref([
-                        {
-                            "id": "2",
-                            "comCode": "",
-                            "comComtype": "2",
-                            "industryName": null,
-                            "comAddressCounty": "开平",
-                            "comBusinessstatus": "",
-                            "comApply": "审核"
-                        },
-                        {
-                            "id": "1",
-                            "comCode": "",
-                            "comComtype": "1",
-                            "industryName": null,
-                            "comAddressCounty": "台山",
-                            "comBusinessstatus": "",
-                            "comApply": "审核"
-                        },
-                        {
-                            "id": "5",
-                            "comCode": "",
-                            "comComtype": "1",
-                            "industryName": null,
-                            "comAddressCounty": "蓬江",
-                            "comBusinessstatus": "",
-                            "comApply": "审核"
-                        }
-                ])
+        const companies = ref([])
+        const sum = ref(0)
+        const page = ref(1)
+        const size = ref(10)
+        const go = ref('')
+        const click_go = () => {
+            console.log(parseInt(go.value))
+            if(!parseInt(go.value) || parseInt(go.value) <= 0){
+                page.value = 1
+                go.value = ''
+                
+            }else{
+                 page.value = parseInt(go.value)
+                 go.value = ''
+            }
+            sendReq()
+        }
+        const change_page = (i) => {
+            if(i <= 0)
+                page.value = 1
+            else 
+                page.value = i
+            sendReq()
+        }
+        const input_size = debounce(() => {
+            sendReq()
+        },1000)
         return {
             industriesList,
             firstLine,
@@ -260,7 +288,14 @@ export default {
             enterprise_name,
             region,
             sendReq,
-            companies
+            companies,
+            sum,
+            page,
+            size,
+            go,
+            click_go,
+            change_page,
+            input_size
         }
     }
 }
@@ -270,6 +305,9 @@ export default {
     .enterpriseList{
         background-color: rgb(225,243,255);
         padding: 15px;
+        max-height: 100vh;
+        min-height: 80vh;
+        // height: 700px;
        .params{   
            border: 3px solid rgb(148,212,255);
            position: relative;
@@ -342,7 +380,7 @@ export default {
            }
            table{
                 font-size: 13px;
-                padding: 2px;
+                // padding: 2px;
                 border: 3px solid rgb(148,212,255);
                 white-space: nowrap;
                 font-weight: 500;
@@ -356,12 +394,13 @@ export default {
                         }
                         th{
                                 font-weight: 700;
-                                padding: 8px 55px;
+                                padding: 7px 52px;  //设置左右内边距过大，侧边栏会被挤压
                                 border: 1px solid rgb(148,212,255);
                                 background: url('../assets/image/enterprise/nav_dropdown_sep.gif')
                             }
                             td{
-                                padding: 8px 20px;
+                                padding: 0px 20px;
+                                line-height: 29px;
                                 border: 3px solid rgb(148,212,255)
                             }
                     }
@@ -396,6 +435,15 @@ export default {
                }
                .right{
                    text-align: left;
+                   .go{
+                       &:hover{
+                           text-decoration: underline;
+                           cursor: pointer;
+                       }
+                   }
+                   .current{
+                       color: red;
+                   }
                }
            }
        }

@@ -40,8 +40,8 @@ const option = {
         top: 20
     },                                                                                                                           
      grid:{
-            x:25,
-            y:45,
+            x:40,
+            y:60,
             x2:5,
             y2:30,
             // borderWidth:1
@@ -52,7 +52,7 @@ const option = {
     },
     legend: {
         orient: 'vertical',
-        left: 200,
+        left: 220,
         top: 40
     },
     series: [
@@ -73,7 +73,6 @@ const option = {
 }
 function init_chart(){
     // 基于准备好的dom，初始化echarts实例
-  console.log(document.getElementById('chart'))
   var myChart = echarts.init(document.getElementById('chart'));
   // 绘制图表
   myChart.setOption(option)
@@ -94,7 +93,6 @@ export default {
                         names.push(item.dataName)
                     })
                 }
-                console.log(res)
                 init_chart()
             })
         }
@@ -113,6 +111,7 @@ export default {
      .enterpriseAnalysis{
          background-color: #fff;
         padding: 15px;
+        min-height: 80vh;
        .params{   
            border: 3px solid rgb(148,212,255);
            position: relative;
@@ -156,7 +155,8 @@ export default {
        .chart{
            width: 100%;
            height: 420px;
-           padding: 5px;
+           //设置padding会把侧边栏挤窄
+        //    padding: 5px;
            overflow: hidden;
        }      
     }

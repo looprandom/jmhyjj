@@ -14,6 +14,8 @@
         <p>版权所有：江门市海洋与渔业局      技术支持：广东蓝图信息技术有限公司</p>
         <p>推荐宽屏显示器（分辩率：1280*1024以上），浏览器：chrome</p>
     </div>
+    <img src="../assets/image/login/login_btnon01.png" alt="" :style="{display:'none'}">
+    <img src="../assets/image/login/login_btnon01.png" alt="" :style="{display:'none'}">
 </div>
 </template>
 

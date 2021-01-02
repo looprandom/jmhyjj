@@ -27,7 +27,7 @@ service.interceptors.request.use(config => {
 /****** respone拦截器==>对响应做处理 ******/
 service.interceptors.response.use(
     response => { //成功请求到数据
-        if (response.data.code !== 20000) {
+        if (response.data.code === 20003 || response.data.code === 20004) {
             localStorage.setItem('token', '')
             router.push({
                 path: '/login'
