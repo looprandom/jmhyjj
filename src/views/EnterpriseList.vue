@@ -82,7 +82,7 @@
                         <th>操作</th>
                     </tr>
                     <tr v-for="item of companies" :key=item.id>
-                       <td>{{item.name}}</td>
+                       <td>{{item.comName}}</td>
                        <td>{{item.comCode}}</td>
                        <td>{{item.comComtype}}</td>
                        <td>{{item.industryName}}</td>
@@ -167,7 +167,6 @@ export default {
             })
             // window.location.reload()
         })
-      
         //params区
         //comType参数
         const comType = ref([true,true,true,true,true])
@@ -301,7 +300,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope="this api replaced by slot-scope in 2.5.0+">
+<style lang="scss" scoped>
     .enterpriseList{
         background-color: rgb(225,243,255);
         padding: 15px;
@@ -399,7 +398,7 @@ export default {
                                 background: url('../assets/image/enterprise/nav_dropdown_sep.gif')
                             }
                             td{
-                                padding: 0px 20px;
+                                // padding: 0px 20px;
                                 line-height: 29px;
                                 border: 3px solid rgb(148,212,255)
                             }

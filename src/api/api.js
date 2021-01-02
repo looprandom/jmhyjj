@@ -1,6 +1,7 @@
 import axios from 'axios'
 //import store from '../store/index'
 import router from '../router/index'
+import jsonlint from '../util/jsonlint'
 
 const service = axios.create({
     // baseURL: process.env.BASE_URL,  // api的base_url
@@ -36,4 +37,5 @@ service.interceptors.response.use(
         return response
     }
 )
+service.defaults.transformResponse = [function(data) { return jsonlint.parse(data) }]
 export default service

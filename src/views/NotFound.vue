@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope="this api replaced by slot-scope in 2.5.0+">
+<style lang="scss" scoped>
 .no_found_container{
     background-color: #494949;
     overflow: hidden;
