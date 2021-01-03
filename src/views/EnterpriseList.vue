@@ -102,7 +102,7 @@
             <div class="opera">
                <div class="left">
                     <span>总记录：{{sum}}条</span>
-                    <span>页码：{{page}} /{{Math.ceil(sum / page)}}</span>
+                    <span>页码：{{page}} /{{Math.ceil(sum / size)}}</span>
                     <span>每页 <input type="number" v-model="size" min="5"
                                         max="50"
                                         @keyup="input_size"> 条</span>

@@ -18,7 +18,7 @@ export default {
     setup(){
         const router = useRouter()
         const back = () => {
-            router.go(-1)
+            router.back()
         }
         const toHome = () => {
             router.push('/')

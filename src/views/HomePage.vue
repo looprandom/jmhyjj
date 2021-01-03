@@ -24,7 +24,6 @@
         </div>
         <div class="right">
         <div class="chart" id="chart">
-            图表
         </div>
         <div class="map">
             <img src="../assets/image/home/mapon_enping.png" alt="">
@@ -88,7 +87,10 @@ export default {
   setup(){
     //初始化图表
     onMounted(()=>{
-      init_chart();
+      setTimeout(()=>{
+        //页面加载顺序问题？
+         init_chart();
+      },1000)
     })
     //News
     let news = ref([])

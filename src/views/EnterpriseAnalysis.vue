@@ -92,8 +92,10 @@ export default {
                         analysis.push({name: item.dataName,value: item.dataNum})
                         names.push(item.dataName)
                     })
+                    setTimeout(()=>{
+                        init_chart()
+                    },500)
                 }
-                init_chart()
             })
         }
         onMounted(()=>{

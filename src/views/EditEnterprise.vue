@@ -39,7 +39,9 @@
                         </div>
                         <div class="input required">
                             <select name="" id="" v-model="params.comComtype">
-                                <option value="sdasd">sda</option>
+                                <option value="0">单产业法人单位</option>
+                                <option value="1">产业活动单位</option>
+                                <option value="2">多产业法人单位</option>
                             </select>
                         </div>
                     </li>
@@ -48,7 +50,17 @@
                             机构类型
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comOrgtype"></select>
+                            <select name="" id="" v-model="params.comOrgtype">
+                                <option value="村委会">村委会</option>
+                                <option value="其他组织机构">其他组织机构</option>
+                                <option value="企业">企业</option>
+                                <option value="事业单位">事业单位</option>
+                                <option value="机关">机关</option>
+                                <option value="社会团体">社会团体</option>
+                                <option value="民办非企业单位">民办非企业单位</option>
+                                 <option value="基金会">基金会</option>
+                                 <option value="居委会">居委会</option>
+                            </select>
                         </div>
                     </li>
                     <li>
@@ -86,7 +98,14 @@
                             营业状态
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comBusinessstatus"></select>
+                            <select name="" id="" v-model="params.comBusinessstatus">
+                                <option value="0">营业</option>
+                                <option value="1">停业</option>
+                                <option value="2">筹建</option>
+                                <option value="3">当年关闭</option>
+                                <option value="4">当年破产</option>
+                                <option value="5">其他</option>
+                            </select>
                         </div>
                     </li>
                      <li>
@@ -102,7 +121,7 @@
                             单位注册地地址(省)
                         </div>
                         <div class="input">
-                            <input type="text" v-model="params.comRegaddrSheng">
+                            <input type="text" v-model="params.comRegaddrSheng" disabled>
                         </div>
                     </li>
                     <li>
@@ -110,7 +129,15 @@
                             单位注册地地址(县)
                         </div>
                         <div class="input required">
-                            <input type="text" v-model="params.comRegaddrXian" >
+                            <select name="" id="" v-model="params.comRegaddrXian">
+                                <option value="台山市">台山市</option>
+                                <option value="鹤山市">鹤山市</option>
+                                <option value="开平市">开平市</option>
+                                <option value="恩平市">恩平市</option>
+                                <option value="新会区">新会区</option>
+                                <option value="蓬江区">蓬江区</option>
+                                <option value="江海区">江海区</option>
+                            </select>
                         </div>
                     </li>
                     <li>
@@ -150,7 +177,12 @@
                             机关级别工商
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comOrglevelBus"></select>
+                            <select name="" id="" v-model="params.comOrglevelBus">
+                                <option value="国家">国家</option>
+                                <option value="省">省</option>
+                                <option value="地(市)">地(市)</option>
+                                <option value="县(市)">县(市)</option>
+                            </select>
                         </div>
                     </li>
                       <li>
@@ -158,7 +190,12 @@
                             机关级别编制
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comOrglevelForm"></select>
+                            <select name="" id="" v-model="params.comOrglevelForm">
+                                <option value="国家">国家</option>
+                                <option value="省">省</option>
+                                <option value="地(市)">地(市)</option>
+                                <option value="县(市)">县(市)</option>
+                            </select>
                         </div>
                     </li>
                      <li>
@@ -166,7 +203,12 @@
                             机关级别民政
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comOrglevelCivil"></select>
+                            <select name="" id="" v-model="params.comOrglevelCivil">
+                                <option value="国家">国家</option>
+                                <option value="省">省</option>
+                                <option value="地(市)">地(市)</option>
+                                <option value="县(市)">县(市)</option>
+                            </select>
                         </div>
                     </li>
                      <li>
@@ -174,7 +216,12 @@
                             机关级别国税
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comOrglevelNattax"></select>
+                            <select name="" id="" v-model="params.comOrglevelNattax">
+                                <option value="国家">国家</option>
+                                <option value="省">省</option>
+                                <option value="地(市)">地(市)</option>
+                                <option value="县(市)">县(市)</option>
+                            </select>
                         </div>
                     </li>
                       <li>
@@ -182,7 +229,12 @@
                             机关级别地税
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comOrglevelTax"></select>
+                            <select name="" id="" v-model="params.comOrglevelTax">
+                                <option value="国家">国家</option>
+                                <option value="省">省</option>
+                                <option value="地(市)">地(市)</option>
+                                <option value="县(市)">县(市)</option>
+                            </select>
                         </div>
                     </li>
                       <li>
@@ -190,7 +242,12 @@
                             机关级别其他
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comOrglevelOth"></select>
+                            <select name="" id="" v-model="params.comOrglevelOth">
+                                <option value="国家">国家</option>
+                                <option value="省">省</option>
+                                <option value="地(市)">地(市)</option>
+                                <option value="县(市)">县(市)</option>
+                            </select>
                         </div>
                     </li>
                     <li>
@@ -198,7 +255,14 @@
                             企业控股情况
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comStock"></select>
+                            <select name="" id="" v-model="params.comStock">
+                                <option value="国有控股">国有控股</option>
+                                <option value="集体控股">集体控股</option>
+                                <option value="私人控股">私人控股</option>
+                                <option value="港澳台商控股">港澳台商控股</option>
+                                <option value="外商控股">外商控股</option>
+                                <option value="其他">其他</option>
+                            </select>
                         </div>
                     </li>
                     <li>
@@ -206,7 +270,13 @@
                             执行会计标准类别
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comImpaccclass"></select>
+                            <select name="" id="" v-model="params.comImpaccclass">
+                                <option value="企业会计制度">企业会计制度</option>
+                                <option value="事业会计单位制度">事业单位会计制度</option>
+                                <option value="行政单位会计制度">行政单位会计制度</option>
+                                <option value="民间非盈利组织会计制度">民间非盈利组织会计制度</option>
+                                <option value="其他">其他</option>
+                            </select>
                         </div>
                     </li>
                     <li>
@@ -214,7 +284,10 @@
                             单位类别
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comComclass"></select>
+                            <select name="" id="" v-model="params.comComclass">
+                                <option value="法人单位本部">法人单位本部</option>
+                                <option value="法人单位分支机构">法人单位分支机构</option>
+                            </select>
                         </div>
                     </li>
                     <li>
@@ -279,7 +352,8 @@
                         </div>
                         <div class="input">
                             <input type="text" 
-                                v-model="params.comAddressSheng">
+                                v-model="params.comAddressSheng"
+                                disabled>
                         </div>
                     </li>
                      <li>
@@ -287,7 +361,15 @@
                             单位所在地(县)
                         </div>
                         <div class="input required">
-                            <input type="text" v-model="params.comAddressXian" >
+                            <select name="" id="" v-model="params.comAddressXian">
+                                <option value="台山市">台山市</option>
+                                <option value="鹤山市">鹤山市</option>
+                                <option value="开平市">开平市</option>
+                                <option value="恩平市">恩平市</option>
+                                <option value="新会区">新会区</option>
+                                <option value="蓬江区">蓬江区</option>
+                                <option value="江海区">江海区</option>
+                            </select>
                         </div>
                     </li>
                     <li>
@@ -351,7 +433,31 @@
                             登记注册类型
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comRegtype"></select>
+                            <select name="" id="" v-model="params.comRegtype">
+                                <option value="国有">国有</option>
+                                <option value="其他有限责任公司">其他有限责任公司</option>
+                                <option value="股份有限公司">股份有限公司</option>
+                                <option value="私营独资">私营独资</option>
+                                <option value="私营合伙">私营合伙</option>
+                                <option value="私营有限责任公司">私营有限责任公司</option>
+                                <option value="私营股份责任公司">私营股份责任公司</option>
+                                <option value="其他">其他</option>
+                                <option value="与港澳台商合资经营">与港澳台商合资经营</option>
+                                 <option value="与港澳台商合作经营">与港澳台商合作经营</option>
+                                  <option value="港澳台商独资">港澳台商独资</option>
+                                  <option value="港澳台商投资股份">港澳台商投资股份</option>
+                                  <option value="中外合资经营">中外合资经营</option>
+                                  <option value="中外合作经营">中外合作经营</option>
+                                  <option value="外商投资股份有限公司">外商投资股份有限公司</option>
+                                  <option value="集体">集体</option>
+                                  <option value="股份合作">股份合作</option>
+                                  <option value="国有联营">国有联营</option>
+                                  <option value="集体联营">集体联营</option>
+                                  <option value="国有与集体联营">国有与集体联营</option>
+                                  <option value="其他联营">其他联营</option>
+                                  <option value="国有独资公司">国有独资公司 </option>
+
+                            </select>
                         </div>
                     </li>
                       <li>
@@ -375,7 +481,7 @@
                             单位注册地地址(地)
                         </div>
                         <div class="input">
-                            <input type="text" v-model="params.comRegaddrDi">
+                            <input type="text" v-model="params.comRegaddrDi" disabled>
                         </div>
                     </li>
                       <li>
@@ -471,7 +577,18 @@
                             隶属关系
                         </div>
                         <div class="input">
-                            <select name="" id="" v-model="params.comSubrel" ></select>
+                            <select name="" id="" v-model="params.comSubrel" >
+                                <option value="中央">中央</option>
+                                <option value="省 (自治区、直辖市)">省 (自治区、直辖市)</option>
+                                <option value="地 (区、市、州、盟)">地 (区、市、州、盟)</option>
+                                <option value="县 (区、市、旗)">县 (区、市、旗)</option>
+                                <option value="街道">街道</option>
+                                <option value="镇">镇</option>
+                                <option value="乡">乡</option>
+                                <option value="居委会">居委会</option>
+                                <option value="村委会">村委会</option>
+                                <option value="其他">其他</option>
+                            </select>
                         </div>
                     </li>
                     <li>
@@ -504,7 +621,7 @@
                             产业活动单位数
                         </div>
                         <div class="input">
-                            <input type="text" v-model="params.comIndustrycount">
+                            <input type="number" v-model="params.comIndustrycount">
                         </div>
                     </li>
                     <li>
@@ -552,7 +669,7 @@
                             单位所在地(地)
                         </div>
                         <div class="input">
-                            <input type="text" v-model="params.comAddressDi">
+                            <input type="text" v-model="params.comAddressDi" disabled>
                         </div>
                     </li>
                     <li>
@@ -609,17 +726,26 @@ export default {
             getDetailCominfo(route.query.id).then(res => {
                 for(let key in res.data.detailComInfo) 
                     params[key] = res.data.detailComInfo[key]
+                     if(params.comImgurl){
+                        bgimg.value = params.comImgurl
+                    }
+                    delete params.comImgurl
+                    if(params.comIndustrycount == -1){
+                        params.comIndustrycount = ''
+                    }
                 })
-            }
-            console.log(params)
+                params.jude = '0'
+            }else{
+                params.jude = '1'
+            }      
         })
         const params = reactive({
             bussiness: new Array(3).fill(''),   //主要业务活动
             comAddress: '',                     //所在地单位所在地地址（街）【所在地详细地址】
-            comAddressDi: '',                    //单位所在地地址（地）
+            comAddressDi: '江门市',                    //单位所在地地址（地）
             comAddressJie: '',                  //单位所在地位于-街道办事处
             comAddressShe: '',                   //单位所在地位于-社区（居委会）
-            comAddressSheng: '',                //单位所在地地址（省）
+            comAddressSheng: '广东省',                //单位所在地地址（省）
             comAddressXian: '',                 //单位所在地地址（县）
             comAddressXiang: '',                //单位所在地地址乡
             comBusinessstatus: '',              //营业状态
@@ -657,10 +783,10 @@ export default {
             comOrglevelTax: '',                 //机关级别地税
             comOrgtype: '',                     //机构类型
             comRegaddr: '',                     //单位注册地地址（街）【注册地详细地址】
-            comRegaddrDi: '',                   //注册地区地
+            comRegaddrDi: '江门市',                   //注册地区地
             comRegaddrJie: '',                  //注册地区街道办
             comRegaddrShe: '',                  //注册地区社区居委会
-            comRegaddrSheng: '',                //注册地区省
+            comRegaddrSheng: '广东省',                //注册地区省
             comRegaddrXian: '',                 //注册地区县
             comRegaddrXiang: '',                //注册地区乡
             comRegareacode: '',                 //注册地区划代码
@@ -684,22 +810,24 @@ export default {
             industryId: ''                      //所属行业
         })
         const save = ()=>{
-            params.jude = '1'
+            if(!params.comIndustrycount)
+                params.comIndustrycount = -1
+            console.log(params.comIndustrycount)
             saveEnterprise(params).then((res)=>{
                if(res.code === 20000){
                    router.go(-1)
+               }else if(res.code === 10003){
+                  alert("图片格式错误")
+               }else if(res.code === 10001){
+                    alert("保存失败，请确保填写完全必填项")
                }else{
-                   alert("保存失败，请确保填写完全必填项")
+                    alert("保存失败，请确保填写完全必填项")
                }
             },() => {
                 alert("保存失败，请确保填写完全必填项")
             })
         }
         const bgimg = ref(bg)
-        if(params.image){
-            bgimg.value = params.image
-        }
-        delete params.image
         const getFile = (e) => {
             let files = e.target.files
             params.image = files[0]
@@ -838,7 +966,7 @@ export default {
                             flex-grow: 1;
                             padding-left: 5px;
                             position: relative;
-                            input[type=text],select{
+                            input[type=text],input[type=number],select{
                                 height: 15px;
                                 width: 202px;
                             }
