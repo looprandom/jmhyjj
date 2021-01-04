@@ -35,7 +35,7 @@ import _getMenu from '../api/home/getMenu'
 import _logout from '../api/home/logout'
 import moment from 'moment'
 
-const tmpRoute = ['/','/home/enterprise']
+const tmpRoute = ['/','/home/enterprise','/home/collect','/home/check']
 export default {
     name: 'Header',
     components:{Announce},

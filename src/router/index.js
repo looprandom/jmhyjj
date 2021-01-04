@@ -17,32 +17,65 @@ const NoFound = () =>
     import ('../views/NotFound')
 const EditEnterprise = () =>
     import ('../views/EditEnterprise')
+const Collect = () =>
+    import ('../views/Collect')
+const CollectFillIn = () =>
+    import ('../views/CollectFillIn')
+const CollectDataQuery = () =>
+    import ('../views/CollectDataQuery')
+const CollectFillSituation = () =>
+    import ('../views/CollectFillSituation')
+const Check = () =>
+    import ('../views/Check')
+const CheckReport = () =>
+    import ('../views/CheckReport')
+const CheckUrge = () =>
+    import ('../views/CheckUrge')
+const CheckFile = () =>
+    import ('../views/CheckFile')
 
-const constantRouterMap = [{
-        path: '/login',
-        name: 'login',
-        component: Login
-    }, { path: '/', redirect: '/home' },
+
+const constantRouterMap = [
+
+    { path: '/login', name: 'login', component: Login },
+    { path: '/', redirect: '/home' },
     { path: '/home', redirect: '/home/homepage' },
     { path: '/home/enterprise', redirect: '/home/enterprise/list' },
+    { path: '/home/collect', redirect: '/home/collect/fill_in' },
+    { path: '/home/check', redirect: '/home/check/check_report' },
     {
         path: '/home',
         name: 'Home',
         component: Home,
-        children: [{
-            path: 'homepage',
-            component: HomePage
-        }, {
-            path: 'enterprise',
-            component: Enterprise,
-            children: [{
-                path: 'list',
-                component: EnterpriseList
-            }, {
-                path: 'analysis',
-                component: EnterpriseAnalysis
-            }]
-        }]
+        children: [
+            { path: 'homepage', component: HomePage },
+            {
+                path: 'enterprise',
+                component: Enterprise,
+                children: [
+                    { path: 'list', component: EnterpriseList },
+                    { path: 'analysis', component: EnterpriseAnalysis }
+                ]
+            },
+            {
+                path: 'collect',
+                component: Collect,
+                children: [
+                    { path: 'fill_in', component: CollectFillIn },
+                    { path: 'data_query', component: CollectDataQuery },
+                    { path: 'fill_situation', component: CollectFillSituation }
+                ]
+            },
+            {
+                path: 'check',
+                component: Check,
+                children: [
+                    { path: 'report', component: CheckReport },
+                    { path: 'urge', component: CheckUrge },
+                    { path: 'file', component: CheckFile }
+                ]
+            }
+        ]
     },
     { path: '/edit_enterprise', component: EditEnterprise },
     { path: '/404', component: NoFound },
