@@ -60,12 +60,12 @@ export default {
             }
             .link{
                 div{
-                    width: 70px;
-                    height: 70px;
+                    width: 74px;
+                    height: 74px;
                     background-color: rgb(204,237,254);
                     margin: 20px auto;
                     text-align: center;
-                    font-size: 13px;
+                    font-size: 12px;
                     overflow: hidden; //解决外边距重叠
                     border: 1px solid #fff;
                     a{

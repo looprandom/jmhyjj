@@ -52,7 +52,8 @@ export default {
                     store.commit('change_role',res.data.role)
                     store.commit('change_permission',res.data.permission)
                     store.commit('change_token',res.data.token)
-                    router.go(-1)
+                    // router.go(-1)
+                    router.push('/')
               }else{
                   alert(res.errMsg)
               }

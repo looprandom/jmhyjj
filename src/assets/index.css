@@ -6,3 +6,7 @@ a {
 body {
     background-color: rgb(111, 228, 254);
 }
+
+input {
+    margin: 0px 4px;
+}

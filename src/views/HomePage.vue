@@ -23,7 +23,10 @@
         </div>
         </div>
         <div class="right">
-        <div class="chart" id="chart">
+        <div class="chart_container">
+          <div class="chart" id="chart">
+          </div>
+           <div class="full_screen iconfont icon-quanping" @click="toChart"></div>
         </div>
         <div class="map">
             <img src="../assets/image/home/mapon_enping.png" alt="">
@@ -41,27 +44,33 @@
 import {ref,onMounted} from 'vue'
 import _getNews from '../api/home/getNews'
 import format_time from '../util/format_time'
+import {useRouter} from 'vue-router'
 // import { SmileOutlined } from '@ant-design/icons-vue';
 // import { notification } from 'ant-design-vue';
 var echarts = require('echarts');
-
-function init_chart(){
-    // 基于准备好的dom，初始化echarts实例
-  var myChart = echarts.init(document.getElementById('chart'));
-  // 绘制图表
-  myChart.setOption({
+const option = {
       title: {
           text: '海洋监测',
-          left: 'center'
+          left: 'center',
+          top: 15
       },
       grid:{
-            x:25,
+            x:30,
             y:45,
-            x2:5,
+            x2:15,
             y2:30,
             // borderWidth:1
       },
       tooltip: {},
+      toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {
+                name:'',
+                title: ''
+            }
+        }
+      },
       xAxis: {
           data: ['2004年', '2005年', '2006年', '2008年', '2009年', '2010年','2011年','2012年','2013年']
       },
@@ -79,17 +88,27 @@ function init_chart(){
           type: 'line',
           data: [5, 20, 36, 10, 10, 20]
       }]
-  });
+}
+function init_chart(){
+    // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('chart'))
+  // 绘制图表
+  myChart.setOption(option)
+  //   setTimeout(()=>{
+  //     myChart.resize()
+  // },1000)
 }
 
 export default {
   name: 'HomePage',
   setup(){
+    const router = useRouter()
     //初始化图表
     onMounted(()=>{
+      document.getElementById('chart').style.height = '225px'
       setTimeout(()=>{
         //页面加载顺序问题？
-         init_chart();
+         init_chart()
       },1000)
     })
     //News
@@ -101,11 +120,27 @@ export default {
          }
       })
     })
+    
+    const toChart = () => {
+            router.push({
+                name: 'chart',
+                params: {option: JSON.stringify(option)}
+            })
+        }
     return {
       news,
-      format_time
+      format_time,
+      toChart
     }
-  }
+  },
+  beforeRouteEnter (to, from, next) {
+        // 在渲染该组件的对应路由被 confirm 前调用
+        // 不！能！获取组件实例 `this`
+        // 因为当守卫执行前，组件实例还没被创建
+        next(vm => {
+           vm.$forceUpdate()
+        })
+    },
 } 
 </script>
 
@@ -181,12 +216,29 @@ export default {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        .chart{
+        .chart_container{
           height: 225px;
+          width: 100%;
           background-color: #fff;
-          margin: 1px;
-          padding: 15px;
-          box-sizing: border-box;
+          position: relative;
+          .chart{
+              height: 100%;
+              background-color: #fff;
+              margin: 1px;
+              box-sizing: border-box;
+            }
+           .full_screen{
+              position: absolute;
+              cursor: pointer;
+              right: 40px;
+              top: 8px;
+              font-size: 19px;
+              color: rgb(102,102,102);
+              font-weight: 500;
+              &:hover{
+                  color: red;
+              }
+            }
         }
         .map{
           background: #D1E9F7 url("../assets/image/home/map_bg.png") center no-repeat;

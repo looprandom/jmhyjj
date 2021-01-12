@@ -1,26 +1,28 @@
 <template>
-    <div class="collect_fill_in">
-        <div class="hed"><span>采集申报</span></div>
-        <div class="line"></div>
-        <div class="display">
+   <div class="generate_file_log">
+        <div class="params">    
+            <span class="title">查询区</span>
+            <span>日期：&nbsp;</span>
+            <input type="date" v-model="date">
+            <input type="button" value="查询">
+        </div>
+         <div class="display">
             <div class="table-container">
                 <table>
                 <tbody>
                     <tr>
-                        <th>表号</th>
-                        <th>报表名称</th>
-                        <th>报告日期</th>
-                        <th>填报单位</th>
-                        <th>填报日期</th>
-                        <th>当前状态</th>
+                        <th>数据包标识</th>
+                        <th>日期</th>
+                        <th>来源</th>
+                        <th>下载次数</th>
+                        <th>操作</th>
                     </tr>
-                    <tr v-for="item of data" :key=item.id>
-                      <td>{{item.num}}</td>
-                       <td>{{item.name}}</td>
-                       <td>{{item.report_date}}</td>
-                       <td>{{item.com}}</td>
-                       <td>{{item.sub_date}}</td>
+                    <tr v-for="(item) of data" :key=item.id>
+                       <td><a href="#/404">{{item.identification}}</a></td>
+                       <td>{{item.date}}</td>
+                       <td>{{item.origin}}</td>
                        <td>{{item.status}}</td>
+                       <td></td>
                     </tr>
                     <tr v-if="!data.length" >
                         <td colspan="8" class="none">---- 没有记录 ----</td>
@@ -28,7 +30,7 @@
                 </tbody>
             </table>
             </div>
-             <div class="opera">
+            <div class="opera">
                <div class="left">
                     <span>总记录：{{sum}}条</span>
                     <span>页码：{{page}} /{{Math.ceil(sum / size)}}</span>
@@ -57,15 +59,15 @@
                </div>
             </div>
         </div>
-         <div class="line"></div>
+        <div class="line"></div>
     </div>
 </template>
 
 <script>
 const tmpdata = [
-{num: '海洋经济监测表2',name:'海洋渔业企事业月表',report_date:'2021年1月',com:'江门市海洋与渔业局',sub_date:'',status:'填报数据'},
-{num: '海洋经济监测表2',name:'海洋渔业企事业月表',report_date:'2021年1月',com:'江门市海洋与渔业局',sub_date:'',status:'填报数据'},
-{num: '海洋经济监测表2',name:'海洋渔业企事业月表',report_date:'2021年1月',com:'江门市海洋与渔业局',sub_date:'',status:'填报数据'}
+    {id:1,identification: '海洋经济监测表1_蔡企业04_20200903161546 ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'互联网导入海洋网 '},
+    {id:2,identification: '海洋经济监测表1_蔡企业04_20200903161546 ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'互联网导入海洋网 '},
+    {id:3,identification: '海洋经济监测表1_蔡企业04_20200903161546 ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'互联网导入海洋网 '}
 ]
 import {ref,onMounted} from 'vue'
 import debounce from '../util/debounce'
@@ -75,14 +77,18 @@ export default {
         const sum = ref(0)
         const page = ref(1)
         const size = ref(10)
-        const go = ref('')
-        const sendReq = () => {
+        const date = ref("")
+        const sendReq = () =>{
+            console.log(date.value)
             data.value = tmpdata
-            console.log(data.value)
         }
-        onMounted(() => {
+        const input_identification = debounce(() => {
             sendReq()
+        },1000)
+        onMounted(() => {
+          sendReq()  
         })
+        const go = ref('')
         const click_go = () => {
             console.log(parseInt(go.value))
             if(!parseInt(go.value) || parseInt(go.value) <= 0){
@@ -106,6 +112,8 @@ export default {
             sendReq()
         },1000)
         return {
+            date, 
+            input_identification,
             data,
             sum,
             page,
@@ -121,20 +129,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-     .collect_fill_in{
-        background-color: rgb(225,243,255);
-        padding: 15px;
-        max-height: 100vh;
-        min-height: 80vh;
-        .hed{
-            text-align: left;
-            font-size: 13px;
-            font-weight: 600;
+    .generate_file_log{
+         .params{   
+           border: 3px solid rgb(148,212,255);
+           position: relative;
+           padding: 10px;
+           font-size: 13px;
+           text-align: left;
+           color: black;
+           font-weight: 500;
+            .title{
+                position: absolute;
+                top: -8px;
+                left: 35px;
+                font-size: 13px;
+                font-weight: 500;
+                background-color: rgb(225,243,255);
+            }
+            select,input{
+                    font-size: 13px;
+                    width: 180px;
+                    line-height: 22px;
+                    margin-right: 80px;
+                    vertical-align: middle;
+            }
+            input[type=text]{
+                line-height: 16px;
+            }
+            input[type=button]{
+                    width: 45px;
+                    line-height: 20px;
+                    margin-left: 5px;
+                    cursor: pointer;
+                    background: url('../assets/image/enterprise/date_bj.gif');
+            }
+              
         }
         .display{
            margin-top: 5px;
            .table-container{
-               height: 430px;
+               height: 400px;
                overflow: auto;
            }
            table{
@@ -159,9 +193,17 @@ export default {
                                 background: url('../assets/image/enterprise/nav_dropdown_sep.gif')
                         }
                         td{
-                                // padding: 0px 20px;
+                                padding: 0px 20px;
                                 line-height: 29px;
-                                border: 3px solid rgb(148,212,255)
+                                border: 3px solid rgb(148,212,255);
+                                a{
+                                    color: black;
+                                    padding: 0 3px;
+                                    &:hover{
+                                        color: red;
+                                        text-decoration: underline;
+                                    }
+                                }
                         }
                         td.none{
                             color: red
@@ -179,7 +221,7 @@ export default {
                    color: rgb(153,181,194)
                }
             }
-            .opera{
+           .opera{
                display: flex;
                font-size: 12px;
                font-weight: 500;
@@ -216,6 +258,6 @@ export default {
                border-top: 2px dotted #000;
                margin-top: 10px;
                margin-bottom: 10px;
-        }
-     }
+        } 
+    }
 </style>

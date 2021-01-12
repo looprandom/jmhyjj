@@ -35,7 +35,7 @@ import _getMenu from '../api/home/getMenu'
 import _logout from '../api/home/logout'
 import moment from 'moment'
 
-const tmpRoute = ['/','/home/enterprise','/home/collect','/home/check']
+const tmpRoute = ['/home/homepage','/home/enterprise/list','/home/collect/fill_in','/home/check/report','/home/monitor','/home/statistics','/home/news/news','/home/sysconfig']
 export default {
     name: 'Header',
     components:{Announce},
@@ -134,6 +134,10 @@ export default {
                         text-decoration: none;
                         color: black;
                     }
+                    .router-link-active {
+                        color: black;
+                    }
+
                 }
             }  
             div{

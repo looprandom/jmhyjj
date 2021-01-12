@@ -17,7 +17,7 @@ const nav = [{
     content: '催办业务',
     imgurl: require('../assets/image/nav_aside/morentu.gif')
 },{
-    path: 'check/file',
+    path: 'check/file/generate_file_log',
     content: '文件导入导出',
     imgurl: require('../assets/image/nav_aside/morentu.gif')
 }]

@@ -33,6 +33,28 @@ const CheckUrge = () =>
     import ('../views/CheckUrge')
 const CheckFile = () =>
     import ('../views/CheckFile')
+const Monitor = () =>
+    import ('../views/Monitor')
+const Chart = () =>
+    import ('../views/Chart')
+const News = () =>
+    import ('../views/News')
+const NewDetail = () =>
+    import ('../views/NewDetail')
+const Table = () =>
+    import ('../components/Table')
+const NewEdit = () =>
+    import ('../views/NewEdit')
+const Sysconfig = () =>
+    import ('../views/Sysconfig')
+const NewConfig = () =>
+    import ('../views/NewConfig')
+const GenerateFileLog = () =>
+    import ('../views/GenerateFileLog')
+const ExportPacketLog = () =>
+    import ('../views/ExportPacketLog')
+const ImportFileLog = () =>
+    import ('../views/ImportFileLog')
 
 
 const constantRouterMap = [
@@ -42,7 +64,9 @@ const constantRouterMap = [
     { path: '/home', redirect: '/home/homepage' },
     { path: '/home/enterprise', redirect: '/home/enterprise/list' },
     { path: '/home/collect', redirect: '/home/collect/fill_in' },
-    { path: '/home/check', redirect: '/home/check/check_report' },
+    { path: '/home/check', redirect: '/home/check/report' },
+    { path: '/home/news', redirect: '/home/news/news' },
+    { path: '/home/check/file', redirect: '/home/check/file/generate_file_log' },
     {
         path: '/home',
         name: 'Home',
@@ -72,12 +96,33 @@ const constantRouterMap = [
                 children: [
                     { path: 'report', component: CheckReport },
                     { path: 'urge', component: CheckUrge },
-                    { path: 'file', component: CheckFile }
+                    {
+                        path: 'file',
+                        component: CheckFile,
+                        children: [
+                            { path: 'generate_file_log', component: GenerateFileLog },
+                            { path: 'export_packet_log', component: ExportPacketLog },
+                            { path: 'import_file_log', component: ImportFileLog }
+                        ]
+                    }
+                ]
+            },
+            { path: 'monitor', component: Monitor },
+            { path: 'news/:type', component: News },
+            { path: 'new_detail', component: NewDetail },
+            {
+                path: 'sysconfig',
+                component: Sysconfig,
+                children: [
+                    { path: 'new_config/:type', component: NewConfig }
                 ]
             }
         ]
     },
     { path: '/edit_enterprise', component: EditEnterprise },
+    { path: '/chart', component: Chart, name: 'chart' },
+    { path: '/table', component: Table, name: 'table' },
+    { path: '/new_edit', component: NewEdit, name: 'new_edit' },
     { path: '/404', component: NoFound },
     { path: "/:catchAll(.*)", redirect: '/404' }
 ]

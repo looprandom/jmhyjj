@@ -5,15 +5,21 @@
             <div class="paramsOne">
                 <div>统计要素</div>
                 <div>
-                    <input type="radio" name="statistics"
+                    <label>
+                         <input type="radio" name="statistics"
                             checked
                             @click="updateChart(0)">所属行业
-                    <input type="radio"
+                    </label>
+                    <label>
+                         <input type="radio"
                             name="statistics"
                             @click="updateChart(1)" >所属地区
-                    <input type="radio"
+                    </label>
+                    <label>
+                        <input type="radio"
                             name="statistics"
                             @click="updateChart(2)" >单位类型
+                    </label>
                 </div>
             </div>
             <div class="paramsTwo">

@@ -4,20 +4,20 @@
             <span class="title">查询区</span>
             <div class="comType">
                 单位类型：
-                <label for=""><input type="checkbox"
+                <label><input type="checkbox"
                                      :checked="comType[0]"
                                      @click="click_all_comType">全部
                 </label> 
-                <label for=""><input type="checkbox"
+                <label><input type="checkbox"
                                      :checked="comType[1]"
                                      @click="click_comType(1)">单产业法人单位</label>
-                <label for=""><input type="checkbox"
+                <label><input type="checkbox"
                                      :checked="comType[2]"
                                      @click="click_comType(2)">多产业法人单位</label>  
-                <label for=""><input type="checkbox" 
+                <label><input type="checkbox" 
                                     :checked="comType[3]"
                                      @click="click_comType(3)">产业活动单位</label>
-                <label for=""><input type="checkbox" 
+                <label><input type="checkbox" 
                                     :checked="comType[4]"
                                      @click="click_comType(4)">其他</label>    
             </div>
@@ -25,14 +25,14 @@
                 <table>
                    <tbody>
                     <tr>
-                        <td rowspan="6" class="th"><span>所属行业：&nbsp;</span></td>
-                        <td><label for=""><input type="checkbox"
+                        <td :rowspan="1 + industriesList.length" class="th"><span>所属行业：&nbsp;</span></td>
+                        <td><label><input type="checkbox"
                                                 :checked="all_industries"
                                                  @click="click_all_industries">全部
                             </label>
                         </td>
                         <td v-for="(item,index) of firstLine" :key="item.id">
-                            <label for="">
+                            <label>
                                 <input type="checkbox" 
                                        :checked="industriesCheckList[0][index]"
                                        @click="click_industry(index)">{{item.name}}
@@ -95,6 +95,9 @@
                                 编辑
                             </router-link>
                         </td>
+                    </tr>
+                    <tr v-if="!companies.length" >
+                        <td colspan="3" class="none">---- 没有记录 ----</td>
                     </tr>
                 </tbody>
             </table>
@@ -198,7 +201,7 @@ export default {
         }
         const click_industry = (index1,index2) => {
             let cur
-            if(!index2)
+            if(index2 !== void 0)
                 cur = industriesCheckList.value[0][index1] = !industriesCheckList.value[0][index1]
             else
                 cur = industriesCheckList.value[index1][index2] = !industriesCheckList.value[index1][index2]
@@ -383,6 +386,7 @@ export default {
                 border: 3px solid rgb(148,212,255);
                 white-space: nowrap;
                 font-weight: 500;
+                text-align: center;
                 tbody{
                     tr{
                         &:nth-child(odd){
@@ -396,12 +400,15 @@ export default {
                                 padding: 7px 52px;  //设置左右内边距过大，侧边栏会被挤压
                                 border: 1px solid rgb(148,212,255);
                                 background: url('../assets/image/enterprise/nav_dropdown_sep.gif')
-                            }
-                            td{
+                        }
+                        td{
                                 // padding: 0px 20px;
                                 line-height: 29px;
                                 border: 3px solid rgb(148,212,255)
-                            }
+                        }
+                        td.none{
+                            color: red
+                        }
                     }
                }
                .edit{
