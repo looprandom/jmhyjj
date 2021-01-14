@@ -139,7 +139,7 @@ function init_chart(){
   myChart.setOption(option)
     setTimeout(()=>{
       myChart.resize()
-  },1000)
+  },500)
      
 }
 export default {

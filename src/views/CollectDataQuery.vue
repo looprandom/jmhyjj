@@ -97,7 +97,7 @@
                     </tr>
                     <tr v-for="item of data" :key=item.id>
                        <td>{{item.num}}</td>
-                       <td>{{item.name}}</td>
+                       <td><router-link to="/report_from">{{item.name}}</router-link></td>
                        <td>{{item.report_date}}</td>
                        <td>{{item.com}}</td>
                        <td>{{item.sub_date}}</td>
@@ -363,7 +363,14 @@ export default {
                         td{
                                 // padding: 0px 20px;
                                 line-height: 29px;
-                                border: 3px solid rgb(148,212,255)
+                                border: 3px solid rgb(148,212,255);
+                                a{
+                                    color: black;
+                                    &:hover{
+                                        text-decoration: underline;
+                                        color: red;
+                                    }
+                                }
                         }
                         td.none{
                             color: red

@@ -142,15 +142,10 @@ const option = {
         }
     ]
 }
-
+var myChart
 function init_chart(){
-    // 基于准备好的dom，初始化echarts实例
-  var myChart = echarts.init(document.getElementById('chart_monitor'));
   // 绘制图表
   myChart.setOption(option)
-    setTimeout(()=>{
-      myChart.resize()
-  },1000)
      
 }
 export default {
@@ -170,6 +165,7 @@ export default {
         }
         onMounted(() => {
             document.getElementById('chart_monitor').style.height = '380px'
+            myChart  = echarts.init(document.getElementById('chart_monitor'));
             setTimeout(() => {
                 init_chart()
             },1000)

@@ -9,7 +9,7 @@
                 <option value="2">失败</option>
             </select>
             <span>报表标识：&nbsp;</span>
-            <input type="text" v-model="identification" @keyup="input_identification">
+            <input type="text" v-model="identification">
             <input type="button" value="查询">
         </div>
          <div class="display">
@@ -31,7 +31,7 @@
                        <td></td>
                     </tr>
                     <tr v-if="!data.length" >
-                        <td colspan="8" class="none">---- 没有记录 ----</td>
+                        <td colspan="5" class="none">---- 没有记录 ----</td>
                     </tr>
                 </tbody>
             </table>
@@ -90,9 +90,6 @@ export default {
             console.log(identification.value)
             data.value = tmpdata
         }
-        const input_identification = debounce(() => {
-            sendReq()
-        },1000)
         onMounted(() => {
           sendReq()  
         })
@@ -122,7 +119,6 @@ export default {
         return {
             status,
             identification,
-            input_identification,
             data,
             sum,
             page,

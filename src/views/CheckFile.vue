@@ -3,7 +3,7 @@
          <div class="hed">
              <router-link to="/home/check/file/generate_file_log"><span>生成文件日志</span></router-link>
             <router-link to="/home/check/file/export_packet_log"><span>导出数据包日志</span></router-link>  
-             <router-link to="/home/check/file/import_file_log"><span>导出文件日志</span></router-link>    
+             <router-link to="/home/check/file/import_file_log"><span>导入文件日志</span></router-link>    
         </div>
         <div class="line"></div>
        <router-view></router-view>

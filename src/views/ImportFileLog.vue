@@ -9,28 +9,27 @@
                 <option value="2">失败</option>
             </select>
             <span>报表标识：&nbsp;</span>
-            <input type="text" v-model="identification" @keyup="input_identification">
+            <input type="text" v-model="identification">
+            <input type="button" value="查询">
         </div>
          <div class="display">
             <div class="table-container">
                 <table>
                 <tbody>
                     <tr>
-                        <th>报表标识</th>
+                        <th>名称</th>
                         <th>日期</th>
                         <th>来源</th>
                         <th>状态</th>
-                        <th>操作</th>
                     </tr>
                     <tr v-for="(item) of data" :key=item.id>
-                       <td><a href="#/404">{{item.identification}}</a></td>
+                       <td>{{item.name}}</td>
                        <td>{{item.date}}</td>
                        <td>{{item.origin}}</td>
                        <td>{{item.status}}</td>
-                       <td></td>
                     </tr>
                     <tr v-if="!data.length" >
-                        <td colspan="8" class="none">---- 没有记录 ----</td>
+                        <td colspan="4" class="none">---- 没有记录 ----</td>
                     </tr>
                 </tbody>
             </table>
@@ -65,14 +64,18 @@
             </div>
         </div>
         <div class="line"></div>
+         <div class="but">
+             <input type="file">
+            <input type="button" value="导入数据">
+        </div>
     </div>
 </template>
 
 <script>
 const tmpdata = [
-    {id:1,identification: '海洋经济监测表1_蔡企业04_20200903161546 ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'互联网导入海洋网 '},
-    {id:2,identification: '海洋经济监测表1_蔡企业04_20200903161546 ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'互联网导入海洋网 '},
-    {id:3,identification: '海洋经济监测表1_蔡企业04_20200903161546 ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'互联网导入海洋网 '}
+    {id:1,name: '20150326151543_海洋网导入互联网.zip ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'成功 '},
+    {id:2,name: '20150326151543_海洋网导入互联网.zip ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'成功 '},
+    {id:3,name: '20150326151543_海洋网导入互联网.zip ',date: '2020-11-24 20:56:50',origin:'互联网导入海洋网 ',status:'成功 '}
 ]
 import {ref,onMounted} from 'vue'
 import debounce from '../util/debounce'
@@ -89,9 +92,6 @@ export default {
             console.log(identification.value)
             data.value = tmpdata
         }
-        const input_identification = debounce(() => {
-            sendReq()
-        },1000)
         onMounted(() => {
           sendReq()  
         })
@@ -121,7 +121,6 @@ export default {
         return {
             status,
             identification,
-            input_identification,
             data,
             sum,
             page,
@@ -164,11 +163,18 @@ export default {
             input[type=text]{
                 line-height: 16px;
             }
+            input[type=button]{
+                    width: 45px;
+                    line-height: 20px;
+                    margin-left: 5px;
+                    cursor: pointer;
+                    background: url('../assets/image/enterprise/date_bj.gif');
+            }
         }
         .display{
            margin-top: 5px;
            .table-container{
-               height: 400px;
+               height: 380px;
                overflow: auto;
            }
            table{
@@ -258,6 +264,22 @@ export default {
                border-top: 2px dotted #000;
                margin-top: 10px;
                margin-bottom: 10px;
-        } 
+        }
+        .but{
+            text-align: left;
+             input[type=button]{
+                    padding: 0 6px;
+                    height: 24px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    background: url('../assets/image/enterprise/date_bj.gif');
+            }
+            span{
+                font-size: 14px;
+            }
+            input[type=checkbox]{
+                vertical-align: baseline;
+            }
+        }   
     }
 </style>

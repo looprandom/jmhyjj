@@ -55,6 +55,10 @@ const ExportPacketLog = () =>
     import ('../views/ExportPacketLog')
 const ImportFileLog = () =>
     import ('../views/ImportFileLog')
+const ReportForm = () =>
+    import ('../views/ReportFrom')
+const StatisticalAnalysis = () =>
+    import ('../views/StatisticalAnalysis')
 
 
 const constantRouterMap = [
@@ -116,6 +120,13 @@ const constantRouterMap = [
                 children: [
                     { path: 'new_config/:type', component: NewConfig }
                 ]
+            },
+            {
+                path: 'statistical',
+                component: StatisticalAnalysis,
+                children: [
+
+                ]
             }
         ]
     },
@@ -123,6 +134,7 @@ const constantRouterMap = [
     { path: '/chart', component: Chart, name: 'chart' },
     { path: '/table', component: Table, name: 'table' },
     { path: '/new_edit', component: NewEdit, name: 'new_edit' },
+    { path: '/report_from', component: ReportForm, name: 'report_from' },
     { path: '/404', component: NoFound },
     { path: "/:catchAll(.*)", redirect: '/404' }
 ]
