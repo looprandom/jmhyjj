@@ -36,7 +36,7 @@
              <li>
                 <div @click="change_son(3)" class="hed">系统维护</div>
                <div class="son" v-if="son[3]">
-                     <div><span class="iconfont icon-yousanjiao2"></span>系统环境配置</div>
+                     <router-link to="/home/sysconfig/sys_env_config"><div><span class="iconfont icon-yousanjiao2"></span>系统环境配置</div></router-link>
                     <div><span class="iconfont icon-yousanjiao2"></span>系统菜单</div>
                 </div>
             </li>

@@ -249,10 +249,10 @@ export default {
             opacity: 0;
             cursor: pointer;
           }
-          img:hover{
-            //仍然可交互
-            opacity: 1;
-          }
+          // img:hover{
+          //   //仍然可交互
+          //   opacity: 1;
+          // }
           img:first-child{
             position: absolute;
             top: 155px;

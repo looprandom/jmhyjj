@@ -3,8 +3,8 @@
         <div class="top_bg" v-if="show_top"></div>
         <div class="set">
             <ul>
-                <li v-for="(item) of menu" :key="item.id">
-                    <router-link :to="item.path">{{item.name}}</router-link>
+                <li v-for="(item,index) of menu" :key="index">
+                    <router-link :to="'/home/'+ item.path">{{item.meta.title}}</router-link>
                 </li>
             </ul>
             <div @click="logout"><img src="../assets/image/header/tuichu.gif" alt="">&nbsp;<span>安全退出</span></div>
@@ -47,6 +47,8 @@ export default {
             _logout().then((res)=>{
                 if(res.code == 20000){
                     localStorage.setItem('token','');
+                    store.commit('SET_TOKEN', '')
+                    store.commit('SET_ROLES', [])
                     router.push('/login')
                 }
             })
@@ -76,19 +78,30 @@ export default {
         
 
         //显示菜单逻辑
-        const menu = ref([])
-        onMounted(()=>{
-             _getMenu().then((res)=>{
-                if(res.code == 20000){
-                    tmpRoute.forEach((item,index) => {
-                        res.data.menu[index].path = item
-                    })
-                    console.log(res.data.menu)
-                     menu.value = res.data.menu
-                }
-            })       
+        // const menu = ref([])
+        // onMounted(()=>{
+        //      _getMenu().then((res)=>{
+        //         if(res.code == 20000){
+        //             tmpRoute.forEach((item,index) => {
+        //                 res.data.menu[index].path = item
+        //             })
+        //             console.log(res.data.menu)
+        //              menu.value = res.data.menu
+        //         }
+        //     })       
+        // })
+        const menu = computed(()=>{
+             return store.getters.addRouters
+             .filter((item=>{
+                 if(item.name === 'Home')
+                    return true
+             }))[0].children
+             .filter((item) => {
+                 if(item.meta.title)
+                    return true
+             })
         })
-
+        console.log(menu.value)
         return {
             logout,
             show_top,
