@@ -27,15 +27,15 @@
 </template>
 
 <script>
-import {ref,onMounted,reactive,computed} from "vue"
+import {ref,reactive,computed} from "vue"
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 import Announce from '../components/Announce'
-import _getMenu from '../api/home/getMenu'
+// import _getMenu from '../api/home/getMenu'
 import _logout from '../api/home/logout'
 import moment from 'moment'
 
-const tmpRoute = ['/home/homepage','/home/enterprise/list','/home/collect/fill_in','/home/check/report','/home/monitor','/home/statistical','/home/news/news','/home/sysconfig']
+// const tmpRoute = ['/home/homepage','/home/enterprise/list','/home/collect/fill_in','/home/check/report','/home/monitor','/home/statistical','/home/news/news','/home/sysconfig']
 export default {
     name: 'Header',
     components:{Announce},

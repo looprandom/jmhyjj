@@ -97,7 +97,7 @@
                         </td>
                     </tr>
                     <tr v-if="!companies.length" >
-                        <td colspan="3" class="none">---- 没有记录 ----</td>
+                        <td colspan="8" class="none">---- 没有记录 ----</td>
                     </tr>
                 </tbody>
             </table>
